@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <navigation-bar></navigation-bar>
+        </div>
+        <div class="col-lg-9">
+          <router-view/>
+        </div>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
@@ -13,7 +18,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -30,3 +34,15 @@
   }
 }
 </style>
+
+<script>
+// @ is an alias to /src
+import NavigationBar from '@/components/NavigationBar.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    NavigationBar
+  }
+}
+</script>
