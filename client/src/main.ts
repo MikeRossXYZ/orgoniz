@@ -9,11 +9,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // https://www.npmjs.com/package/@fortawesome/vue-fontawesome
 import { library as faLibrary } from '@fortawesome/fontawesome-svg-core'
-import { faCalendarAlt, faHome, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faHome, faDoorOpen, faClock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 faLibrary.add(faCalendarAlt)
 faLibrary.add(faHome)
 faLibrary.add(faDoorOpen)
+faLibrary.add(faClock)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 import '@/style/main.scss'

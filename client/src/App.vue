@@ -24,7 +24,7 @@
 #content-view {
   border-right: 1px solid #ababab;
   border-left: 1px solid #ababab;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 </style>
 

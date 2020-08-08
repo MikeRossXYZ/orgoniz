@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="nav-bar" class="container">
     <img id="logo" src="@/assets/LAZICC_logo.png" />
     <ul class="nav flex-column">
       <li class="nav-item">
@@ -26,8 +26,11 @@ export default class NavigationBar extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+#nav-bar {
+  margin-top: 1.5rem;
+}
+
 #logo {
   max-width: 100%;
   margin-bottom: 1rem;

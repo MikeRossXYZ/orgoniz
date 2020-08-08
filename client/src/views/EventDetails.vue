@@ -1,56 +1,87 @@
 <template>
   <div class="container">
     <h1>{{eventInfo.name}}</h1>
-    <p>{{eventInfo.startDateTime}}</p>
-    <p>{{eventInfo.startDateTime}}</p>
+    <div class="meeting-icon-info-pair">
+      <font-awesome-icon class="pair-icon" icon="clock" />
+      <p class="pair-info">{{ eventStartDate }}</p>
+    </div>
+
+    <div v-bind:href="eventInfo.meetingLink" class="meeting-icon-info-pair">
+      <font-awesome-icon class="pair-icon" icon="door-open" />
+      <a v-bind:href="eventInfo.meetingLink" class="pair-info">{{ eventInfo.meetingLink }}</a>
+    </div>
+
+    <div class="event-description">
+      <div v-html="longDescription"></div>
+    </div>
+
+    <div v-if="eventInfo.hiddenDescription" class="event-description">
+      <div v-html="hiddenDescription"></div>
+    </div>
+    
   </div>
 </template>
 
 <style lang="scss" scoped>
-.card {
+.meeting-icon-info-pair {
   margin-bottom: 0.5rem;
-}
 
-.card-title {
-  margin-bottom: 0.2rem;;
-}
+  .pair-icon {
+    float: left;
+    height: 1.25rem;
+    margin-right: 1rem;
+    width: 1.25rem;
+  }
 
-.enter-meeting-btn {
-  margin: 0 0.5rem 0 0;
-  padding: 0.1rem 0.4rem;
-
-  a {
-    color: #fff;
+  .pair-info {
+    font-size: 1.25rem;
+    margin: 0 0 0 0;
   }
 }
 
-.enter-meeting-icon {
-  font-size: 0.75rem;
+.event-description {
+  border-top: 2px solid #444;
+  margin: 2rem 0 0 0;
+  padding: 2rem 0 0 0;
 }
 
-
-.event-date {
-  color: #555;
-  font-size: 0.8rem;
-  margin-bottom: 0.7rem;
-}
-
-.card-text:last-child {
-    margin-bottom: 0;
-}
 </style>
 
 <script lang="ts">
+import showdown from 'showdown';
+import moment from 'moment';
 import { Component, Vue } from 'vue-property-decorator'
+
+const sdConverter = new showdown.Converter();
 
 @Component
 export default class EventDetails extends Vue {
-  private eventInfo: object = {
-      id: 12432432,
-      name: "Case 1 - Oxford University presentation",
-      shortDescription: "After preparing your case, you will present to our judging panel.",
-      startDateTime: new Date(2020, 10, 12, 19, 0),
-      meetingLink: "https://www.google.com"
-    };
+  public eventInfo: any = {
+    id: 12432432,
+    name: "Case 1 - Oxford University presentation",
+    shortDescription: "After preparing your case, you will present to our judging panel.",
+    longDescription: "# H1\nLorem\n## H2\nipsum\n\n![Tux, the Linux mascot](https://d33wubrfki0l68.cloudfront.net/e7ed9fe4bafe46e275c807d63591f85f9ab246ba/e2d28/assets/images/tux.png)",
+    startDateTime: new Date(2020, 10, 12, 19, 0),
+    meetingLink: "https://www.google.com"
+  };
+
+  private get longDescription(): string {
+    if (this.eventInfo.longDescription)
+      return sdConverter.makeHtml(this.eventInfo.longDescription);
+    else
+      return "";
+  }
+
+  private get hiddenDescription(): string {
+    if (this.eventInfo.hiddenDescription) {
+      return sdConverter.makeHtml(this.eventInfo.hiddenDescription);
+    } else {
+      return "";
+    }
+  }
+
+  private get eventStartDate(): string {
+    return moment(this.eventInfo.startDateTime).format('MMMM Do YYYY [at] h:mm a');
+  }
 }
 </script>
