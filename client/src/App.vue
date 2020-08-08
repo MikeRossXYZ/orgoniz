@@ -5,7 +5,7 @@
         <div class="col-sm-3">
           <navigation-bar></navigation-bar>
         </div>
-        <div class="col-lg-9">
+        <div id="content-view" class="col-lg-9">
           <router-view/>
         </div>
       </div>
@@ -21,17 +21,10 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#content-view {
+  border-right: 1px solid #ababab;
+  border-left: 1px solid #ababab;
+  padding: 1rem 0;
 }
 </style>
 

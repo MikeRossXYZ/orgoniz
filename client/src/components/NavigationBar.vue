@@ -4,12 +4,14 @@
     <ul class="nav flex-column">
       <li class="nav-item">
         <router-link to="/">
-          <font-awesome-icon class="nav-icon" icon="home" />Home
+          <font-awesome-icon class="nav-icon" icon="home" />
+          <span class="nav-text">Home</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/about">
-          <font-awesome-icon class="nav-icon" icon="calendar-alt" />Schedule
+        <router-link to="/events">
+          <font-awesome-icon class="nav-icon" icon="calendar-alt" />
+          <span class="nav-text">Schedule</span>
         </router-link>
       </li>
     </ul>
@@ -42,17 +44,24 @@ export default class NavigationBar extends Vue {
       color: black;
       display: inline-block;
       font-size: 1.25rem;
+      font-weight: bold;
+      text-decoration: none;
       padding: 0.5rem 1.25rem;
 
       &:hover {
-        color: white;
-        background: black;
+        color: #330072;
+        background: rgba(160, 94, 181, 0.5);
+      }
+
+      &.router-link-exact-active {
+        color: #330072;
       }
     }
   }
 
   .nav-icon {
     margin-right: 1.25rem;
+    width: 1.5rem;
   }
 }
 
