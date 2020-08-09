@@ -15,7 +15,7 @@
       <div v-html="longDescription"></div>
     </div>
 
-    <div v-if="eventInfo.hiddenDescription" class="event-description">
+    <div v-if="eventInfo.hiddenDescription && isEventActive" class="event-description">
       <div v-html="hiddenDescription"></div>
     </div>
     
@@ -61,7 +61,8 @@ export default class EventDetails extends Vue {
     name: "Case 1 - Oxford University presentation",
     shortDescription: "After preparing your case, you will present to our judging panel.",
     longDescription: "# H1\nLorem\n## H2\nipsum\n\n![Tux, the Linux mascot](https://d33wubrfki0l68.cloudfront.net/e7ed9fe4bafe46e275c807d63591f85f9ab246ba/e2d28/assets/images/tux.png)",
-    startDateTime: new Date(2020, 10, 12, 19, 0),
+    hiddenDescription: "Revealed when event commences",
+    startDateTime: new Date(2020, 5, 12, 19, 0),
     meetingLink: "https://www.google.com"
   };
 
@@ -78,6 +79,10 @@ export default class EventDetails extends Vue {
     } else {
       return "";
     }
+  }
+
+  private get isEventActive(): boolean {
+    return moment() >= moment.utc(this.eventInfo.startDateTime);
   }
 
   private get eventStartDate(): string {

@@ -22,6 +22,11 @@ Vue.use(VueRouter)
     path: '/events/:id',
     name: 'event-details',
     component: () => import('../views/EventDetails.vue')
+  },
+  {
+    path: '/events/edit/:id',
+    name: 'event-edit',
+    component: () => import('../views/EventEdit.vue')
   }
 ]
 
