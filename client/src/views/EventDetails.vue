@@ -6,7 +6,7 @@
       <p class="pair-info">{{ eventStartDate }}</p>
     </div>
 
-    <div v-bind:href="eventInfo.meetingLink" class="meeting-icon-info-pair">
+    <div v-if="eventInfo.meetingLink" v-bind:href="eventInfo.meetingLink" class="meeting-icon-info-pair">
       <font-awesome-icon class="pair-icon" icon="door-open" />
       <a v-bind:href="eventInfo.meetingLink" class="pair-info">{{ eventInfo.meetingLink }}</a>
     </div>
@@ -50,6 +50,8 @@
 <script lang="ts">
 import showdown from 'showdown';
 import moment from 'moment';
+import axios from 'axios';
+import url from 'url';
 import { Component, Vue } from 'vue-property-decorator'
 
 const sdConverter = new showdown.Converter();
@@ -65,6 +67,12 @@ export default class EventDetails extends Vue {
     startDateTime: new Date(2020, 5, 12, 19, 0),
     meetingLink: "https://www.google.com"
   };
+
+  created(): void {
+    axios.get(url.resolve(process.env.VUE_APP_API_ENDPOINT, "event/" + this.$route.params.id)).then((res) => {
+      this.eventInfo = res.data;
+    });
+  }
 
   private get longDescription(): string {
     if (this.eventInfo.longDescription)

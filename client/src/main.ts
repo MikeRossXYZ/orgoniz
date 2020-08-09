@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import dotenv from 'dotenv';
+
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
@@ -18,6 +20,9 @@ faLibrary.add(faClock)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 import '@/style/main.scss'
+
+// Load the secret/environment variables
+// dotenv.config();
 
 Vue.config.productionTip = false
 

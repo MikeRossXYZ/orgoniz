@@ -6,7 +6,7 @@
       <div class="card" v-for="event in events" :key="event.id">
         <div class="card-body">
           <h5 class="card-title">
-            <router-link :to="{ name: 'event-details', params: { id: event.id }}">{{ event.name }}</router-link>
+            <router-link :to="{ name: 'event-details', params: { id: event._id }}">{{ event.name }}</router-link>
           </h5>
           <p class="card-text event-date">{{ event.startDateTime }}</p>
           <p class="card-text">{{ event.shortDescription }}</p>
@@ -26,7 +26,7 @@
       <div class="card" v-for="event in events" :key="event.id">
         <div class="card-body">
           <h5 class="card-title">
-            <router-link :to="{ name: 'event-details', params: { id: event.id }}">{{ event.name }}</router-link>
+            <router-link :to="{ name: 'event-details', params: { id: event._id }}">{{ event.name }}</router-link>
           </h5>
           <p class="card-text event-date">{{ event.startDateTime }}</p>
           <p class="card-text">{{ event.shortDescription }}</p>
@@ -80,23 +80,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import axios from 'axios'
 
 @Component
 export default class Schedule extends Vue {
-  private events: Array<object> = [
-    {
-      id: 12432432,
-      name: "Case 1 - Oxford University resolution",
-      shortDescription: "Case preparation time",
-      startDateTime: new Date(2020, 10, 12, 15, 0),
-    },
-        {
-      id: 12432432,
-      name: "Case 1 - Oxford University presentation",
-      shortDescription: "After preparing your case, you will present to our judging panel.",
-      startDateTime: new Date(2020, 10, 12, 19, 0),
-      meetingLink: "https://www.google.com"
-    }
-  ];
+  private events: Array<object> = [];
+
+  mounted(): void {
+    console.log(process.env);
+    axios.get(process.env.VUE_APP_API_ENDPOINT + "/event/").then((res) => {
+      this.events = res.data;
+    })
+  }
 }
 </script>
